@@ -15,12 +15,15 @@ var Todo = mongoose.model('Todo', {
   }
 });
 
+// Challenge: create new Todo with all parameters
 var newTodo = new Todo({
-  text: 'Makes soup'
+  text: 'Fetch Mail',
+  completed: false,
+  completedAt: null
 });
 
 newTodo.save().then((doc) => {
-  console.log('Saved todo', doc);
+  console.log(JSON.stringify(doc, undefined, 2));
 }, (e) => {
   console.log('Unable to save todo');
 });

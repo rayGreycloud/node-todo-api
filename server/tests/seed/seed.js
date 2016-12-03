@@ -25,13 +25,15 @@ const todos = [
     _id: new ObjectID(),
     text: 'First test todo',
     completed: false,
-    completedAt: null
+    completedAt: null,
+    _creator: userOneId
   },
   {
     _id: new ObjectID(),
     text: 'Second test todo',
     completed: true,
-    completedAt: 333
+    completedAt: 333,
+    _creator: userTwoId
   }
 ];
 

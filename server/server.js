@@ -15,27 +15,27 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
-app.post('/todos', authenticate, (req, res) => {
-  var todo = new Todo({
+app.post('/todos', authenticate, async (req, res) => {
+  const todo = new Todo({
     text: req.body.text,
     _creator: req.user._id
   });
 
-  todo.save().then((doc) => {
+  try {
+    const doc = await todo.save();
     res.send(doc);
-  }, (e) => {
+  } catch (e) {
     res.status(400).send(e);
-  });
+  };
 });
 
-app.get('/todos', authenticate, (req, res) => {
-  Todo.find({
-    _creator: req.user._id
-  }).then((todos) => {
+app.get('/todos', authenticate, async (req, res) => {
+  try {
+    const todos = await Todo.find({ _creator: req.user._id });
     res.send({todos});
-  }, (e) => {
+  } catch (e) {
     res.status(400).send(e);
-  });
+  };
 });
 
 app.get('/todos/:id', authenticate, (req, res) => {
